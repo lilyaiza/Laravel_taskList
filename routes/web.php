@@ -30,6 +30,7 @@ Route::post('/task', function (Request $request) {
 
     $task = new Task;
     $task->name = $request->name;
+    $task->fet = 'no';
     $task->save();
 
     return redirect('/');
@@ -42,4 +43,20 @@ Route::delete('/task/{task}', function (Task $task) {
      $task->delete();
 
     return redirect('/');
+});
+
+Route::put('/task/{task}', function (Task $task) {
+
+    if ($task->fet == 'no') {
+        $task->fet = 'si';
+    }
+
+    else {
+        $task->fet = 'no';
+    }
+    
+    $task->save();
+
+    return redirect('/');
+
 });

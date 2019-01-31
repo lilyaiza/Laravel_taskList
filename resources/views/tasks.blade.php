@@ -16,46 +16,53 @@
 
             <!-- Task Name -->
             <div class="form-group">
-                <label for="task" class="col-sm-3 control-label">Task</label>
+                <label for="task" class="col-sm-3 control-label">Nueva tarea:</label>
 
                 <div class="col-sm-6">
                     <input type="text" name="name" id="task-name" class="form-control">
                 </div>
             </div>
-
+            <br>
             <!-- Add Task Button -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-default">
-                        <i class="fa fa-plus"></i> Add Task
+                        <i class="fa fa-plus"></i> Añadir Tarea
                     </button>
                 </div>
             </div>
         </form>
     </div>
+    <br><br>
     <!-- current tasks -->
     @if (count($tasks) > 0)
         <div class="panel panel-default">
             <div class="panel-heading">
-                Current Tasks
+                <b>Tareas actuales:</b>
             </div>
-
+            <br>
             <div class="panel-body">
-                <table class="table table-striped task-table">
+                <table style="border: 1px solid black" class="table table-striped task-table">
 
                     <!-- Table Headings -->
                     <thead>
-                        <th>Task</th>
+                        <th>Lista de tareas: </th>
                         <th>&nbsp;</th>
                     </thead>
 
                     <!-- Table Body -->
                     <tbody>
+                        <tr>
+                            <td><b>Nombre</td></b>
+                            <td><b>Hecho</td></b>
                         @foreach ($tasks as $task)
                             <tr>
                                 <!-- Task Name -->
                                 <td class="table-text">
                                     <div>{{ $task->name }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $task->fet }}</div>
                                 </td>
 
                                 <td>
@@ -70,6 +77,16 @@
 
                                                 <button type="submit" class="btn btn-danger">
                                                     <i class="fa fa-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                         <td>
+                                            <form action="{{ url('task/'.$task->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-trash"></i> Canviar estat
                                                 </button>
                                             </form>
                                         </td>
